@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/tickets-skyscanner-api-redux-saga/static/css/main.a5646a25.chunk.css",
+    "main.js": "/tickets-skyscanner-api-redux-saga/static/js/main.06ea0812.chunk.js",
+    "main.js.map": "/tickets-skyscanner-api-redux-saga/static/js/main.06ea0812.chunk.js.map",
+    "runtime-main.js": "/tickets-skyscanner-api-redux-saga/static/js/runtime-main.65daec90.js",
+    "runtime-main.js.map": "/tickets-skyscanner-api-redux-saga/static/js/runtime-main.65daec90.js.map",
+    "static/js/2.d28217c2.chunk.js": "/tickets-skyscanner-api-redux-saga/static/js/2.d28217c2.chunk.js",
+    "static/js/2.d28217c2.chunk.js.map": "/tickets-skyscanner-api-redux-saga/static/js/2.d28217c2.chunk.js.map",
+    "static/js/3.cf73d311.chunk.js": "/tickets-skyscanner-api-redux-saga/static/js/3.cf73d311.chunk.js",
+    "static/js/3.cf73d311.chunk.js.map": "/tickets-skyscanner-api-redux-saga/static/js/3.cf73d311.chunk.js.map",
+    "index.html": "/tickets-skyscanner-api-redux-saga/index.html",
+    "static/css/main.a5646a25.chunk.css.map": "/tickets-skyscanner-api-redux-saga/static/css/main.a5646a25.chunk.css.map",
+    "static/js/2.d28217c2.chunk.js.LICENSE.txt": "/tickets-skyscanner-api-redux-saga/static/js/2.d28217c2.chunk.js.LICENSE.txt",
+    "static/media/bg.f0dccd1c.png": "/tickets-skyscanner-api-redux-saga/static/media/bg.f0dccd1c.png",
+    "static/media/img1.43b4b93f.png": "/tickets-skyscanner-api-redux-saga/static/media/img1.43b4b93f.png",
+    "static/media/img2.fef67527.png": "/tickets-skyscanner-api-redux-saga/static/media/img2.fef67527.png",
+    "static/media/img3.6bd6b6ab.png": "/tickets-skyscanner-api-redux-saga/static/media/img3.6bd6b6ab.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.65daec90.js",
+    "static/js/2.d28217c2.chunk.js",
+    "static/css/main.a5646a25.chunk.css",
+    "static/js/main.06ea0812.chunk.js"
+  ]
+}
