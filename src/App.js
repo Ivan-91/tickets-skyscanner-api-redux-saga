@@ -6,22 +6,15 @@ import LoginPage from './components/LoginPage';
 import styled from 'styled-components';
 import TicketsPage from './components/TicketsPage';
 import {history} from './helpers/history'
-import { useSelector } from 'react-redux';
 
 
 
 
 const App = () => {
-  const user = useSelector(state => state.auth)
   return (
     <Router history={history}>
       <Container>
-        {/* {user? (
-          <TicketsPage/>
-        ) : (
-          <LoginPage/>
-        )
-        } */}
+        
         <Switch>
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/" component={TicketsPage} />

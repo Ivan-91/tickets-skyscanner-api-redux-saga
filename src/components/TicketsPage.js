@@ -1,45 +1,45 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import calendar from '../assets/calendar.png'
 import img1 from '../assets/img1.png'
 import img2 from '../assets/img2.png'
 import img3 from '../assets/img3.png'
-import img4 from '../assets/Intersect.png'
 import plane from '../assets/plane.png'
 import like from '../assets/like.png'
 import dislike from '../assets/unlike.png'
+import morearrow from '../assets/morearrow.png'
+import arrow1 from '../assets/arrow1.png'
 
 import logoutIcon from '../assets/log-out.png'
 import ellipse from '../assets/Ellipse.png'
 import Scrollbar from './ScrollBar'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPricesThunk, requestPrices } from '../redux/priceReducer'
-import { logout } from '../redux/auth'
 import FlightDatePicker from './DatePicker'
-import { REQUEST_DATE, LIKE, DISLIKE, IS_LIKED } from '../redux/types'
+import { REQUEST_DATE, LIKE, DISLIKE, IS_LIKED, LOGOUT_REQUEST } from '../redux/types'
+import isAuth from '../useAuthStatus'
+import { formatDate } from '../helpers/date-format'
+//import { useAuthStatus } from '../useAuthStatus'
 
 
 
 
 
-const TicketsPage = () => {
+
+const TicketsPage = (props) => {
 
   const {tickets, likedItems} = useSelector(state => state.tickets)
+
   const {date} = useSelector(state => state.setDate)
   const dispatch = useDispatch()
-  
-
 
     useEffect(() => {
-      dispatch({type: REQUEST_DATE,
-        payload: '2021-09-01'})
-      console.log(tickets.Quotes)
-      console.log(date)
-        
-    }, [])
+
+      (isAuth) ? dispatch({type: REQUEST_DATE, payload: '2021-09-01'}) : console.log('dkl')
+      
+          
+    }, [dispatch])
 
     const logOut = () => {
-      dispatch(logout());
+      dispatch({ type: LOGOUT_REQUEST });
     };
 
 
@@ -67,38 +67,43 @@ const TicketsPage = () => {
       })
     }
 
+    
 
+
+
+    if(!isAuth) {
+      props.history.push("/login");
+         window.location.reload();
+    }
+      
     return (
         <>
-        <a href="/login" onClick={logOut}>
-                  <Logout>
+                  <Logout onClick={logOut} href='/login'>
             <h1>Выйти</h1>
-            <div><img src={logoutIcon}/></div>
+            <div><img src={logoutIcon} alt='img'/></div>
             
             </Logout>
-                </a>
-        
       <Container>
         <Wrapper>
           <Title>
-            <h1>Вылеты</h1>
-            <h1>SVO - JFK</h1>
-            {/* <h2>07 июля 2020</h2>
-            <img src={calendar} /> */}
+            <div><h1>Вылеты</h1></div>
+            <Image><img src={morearrow} alt='->'/></Image>
+            <div><h1>SVO - JFK</h1></div>
+            
             <FlightDatePicker/>
           </Title>
 
           <Slider>
-              <Image><img src={img1}/></Image>
-              <Image><img src={img2}/></Image>
-              <Image><img src={img3}/></Image>
-              <Image><img src={img1}/></Image>
+              <Image><img src={img1} alt='img'/></Image>
+              <Image><img src={img2} alt='img'/></Image>
+              <Image><img src={img3} alt='img'/></Image>
+              <Image><img src={img1} alt='img'/></Image>
               
               
 
           </Slider>
           <Text>
-          Добавлено в Избранное: {likedItems.length.toString()} рейсов
+          <h2>Добавлено в Избранное:&nbsp;&nbsp;</h2><h1>{`${likedItems.length}`}</h1> <h2>&nbsp;рейсов</h2>
           </Text>
           <Scrollbar 
             style={{ width: '100%', height: 500 }}
@@ -107,16 +112,16 @@ const TicketsPage = () => {
                 {!tickets.Quotes ? <div>no tickets </div>: tickets.Quotes.map((el, key)=><div key={el.QuoteId}>
         <Race>
             <Icon>
-            <img src={plane}/>
+            <img src={plane} alt='img'/>
             </Icon>
             <Info>
-                <h1>Moscow (SVO) - New York City (JFK)</h1>
-                <h2>{date} - {el.QuoteDateTime.slice(-8, -3)}</h2>
+                <h1>Moscow (SVO) <img src={arrow1} alt='->'/> New York City (JFK)</h1>
+                <h2>{formatDate(date)} &mdash; {el.QuoteDateTime.slice(-8, -3)}</h2>
                 <h2>{tickets.Carriers[el.QuoteId-1].Name}</h2>
             </Info>
             <PriceContainer>
-                {likedItems.some(id=>id===el.MinPrice) ? <Like onClick={()=> setDisLike(el.MinPrice)} > <img src={like}/>  </Like>
-                          : <Like onClick={()=> setLike(el.MinPrice)} > <img src={dislike}/>  </Like>
+                {likedItems.some(id=>id===el.MinPrice) ? <Like onClick={()=> setDisLike(el.MinPrice)} > <img src={like} alt='img'/>  </Like>
+                          : <Like onClick={()=> setLike(el.MinPrice)} > <img src={dislike} alt='img'/>  </Like>
               }
                 <Price>
                     <h3>Price: </h3>
@@ -139,7 +144,7 @@ const TicketsPage = () => {
     );
 }
 
-const Logout = styled.div`
+const Logout = styled.a`
     
     color: #1157A7;
     display: flex;
@@ -152,6 +157,7 @@ const Logout = styled.div`
     }
     margin-right: 31px;
     margin-top: 26px;
+    text-decoration: none
 
 `
 
@@ -181,6 +187,7 @@ background: linear-gradient(-270deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255,
 
 
 `
+
 
 const Container = styled.div`
 margin:auto;
@@ -225,21 +232,6 @@ margin-top: 24px;
   }
   
 `
-const VerticalSlider = styled.div`
-//position: relative;
-height: 180px;
-margin-top: 24px;
-    display: flex;
-    //align-items: flex-start;
-  overflow-x: auto;
-  ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    
-  }
-  
-`
-
-
 
 const Image = styled.div`
 margin-right: 2px;
@@ -249,10 +241,28 @@ margin-left: 2px;
 }
 `
 const Text = styled.div`
+display: flex;
     font-weight: 300;
 font-size: 17px;
 line-height: 22px;
 margin-left: 10px;
+h1{
+  font-weight: 700;
+font-size: 17px;
+line-height: 22px;
+color: #1157A7;
+/* or 129% */
+
+letter-spacing: -0.408px;
+}
+h2{
+  font-weight: 300;
+font-size: 17px;
+line-height: 22px;
+/* or 129% */
+
+letter-spacing: -0.408px;
+}
 `
 
 const Race = styled.div`
@@ -289,6 +299,7 @@ h1 {
     color: whitesmoke;
     //font-weight: 300;
   }
+
 `
 
 const Border = styled.div`

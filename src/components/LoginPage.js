@@ -4,12 +4,19 @@ import bgImg from '../assets/bg.png'
 import Auth from './Auth'
 
 const LoginPage = ({history}) => {
+
+
+
+  
   return (
+    
     <Wrapper>
       <Blur>
-      <Auth history={history}/>
+      <Auth history={history} />
       </Blur>
     </Wrapper>
+
+    
   )
 }
 

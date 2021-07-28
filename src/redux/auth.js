@@ -1,79 +1,37 @@
+import { INIT_USERDATA, LOGIN_FINISH, LOGOUT_FINISH } from "./types";
 
-  
-  import AuthService from "../auth-service";
+const initialState = {
+  username: null,
+  password: null
+}
 
-
-  const user = JSON.parse(localStorage.getItem("access-key"));
-  
-  const initialState = user
-    ? { isLoggedIn: true, user }
-    : { isLoggedIn: false, user: null };
-  
-  export default function (state = initialState, action) {
-    const { type, payload } = action;
-  
-    switch (type) {
-      
-      case 'LOGIN_SUCCESS':
-        return {
-          ...state,
-          isLoggedIn: true,
-          user: true,
-        };
-      case 'LOGIN_FAIL':
-        return {
-          ...state,
-          isLoggedIn: false,
-          user: null,
-        };
-      case 'LOGOUT':
-        return {
-          ...state,
-          isLoggedIn: false,
-          user: null,
-        };
-      default:
-        return state;
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case LOGIN_FINISH: {
+      return {
+        ...state,
+        ...action.payload
+      };
+    }
+    case LOGOUT_FINISH: {
+      return {
+        ...state,
+        username: null,
+        password: null,
+      };
+    }
+    case INIT_USERDATA: {
+      const { username, password } = action.payload;
+      return {
+        ...state,
+        username,
+        password,
+      };
+    }
+    default: {
+      return state;
     }
   }
-  
+};
 
-  export const login = (email, password) => (dispatch) => {
-    AuthService.login()
-    //   (data) => {
-        dispatch({
-          type: 'LOGIN_SUCCESS',
-          //payload: { user: data },
-        });
-  
-        //return Promise.resolve();
-     // },
-      // (error) => {
-      //   const message =
-      //     (error.response &&
-      //       error.response.data &&
-      //       error.response.data.message) ||
-      //     error.message ||
-      //     error.toString();
-  
-        dispatch({
-          type: 'LOGIN_FAIL',
-        });
-  
-        dispatch({
-          type: 'SET_MESSAGE',
-          //payload: message,
-        });
-  
-        //return Promise.reject();
-      }
-  //   );
-  // };
-  
-  export const logout = () => (dispatch) => {
-    AuthService.logout();
-  
-    dispatch({
-      type: 'LOGOUT',
-    });
-  };
+export default authReducer

@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import configureStore from './redux/configureStore';
-import { runSaga } from 'redux-saga';
-import sagaWatcher from './sagas/index'
 
 const store = configureStore()
 

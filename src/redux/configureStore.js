@@ -1,9 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import createSagaMiddleware from 'redux-saga'
 import { combineReducers } from 'redux';
 import authReducer from './auth'
-import { setTicketsReducer, setDateReducer, setLikeReducer } from './priceReducer';
+import { setTicketsReducer, setDateReducer } from './priceReducer';
 import sagaWatcher from '../sagas';
 
 const saga = createSagaMiddleware()
@@ -12,8 +11,7 @@ const saga = createSagaMiddleware()
 const rootReducer = combineReducers({
     tickets: setTicketsReducer,
     auth: authReducer,
-    setDate: setDateReducer,
-    likes: setLikeReducer
+    setDate: setDateReducer
 });
 
 

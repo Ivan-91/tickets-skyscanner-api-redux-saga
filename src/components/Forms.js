@@ -9,12 +9,16 @@ export const FormGroup = styled.form`
 
 
     color: #424242;
+    position: relative;
 
 `;
 
 export const Label = styled.label`
 	margin-bottom: 0.5em;
     display: block;
+    font-weight: 300;
+font-size: 16px;
+line-height: 19px;
   
 
 `;
@@ -27,6 +31,8 @@ export const Message = styled.label`
     display: block;
 `;
 
+
+
 export const StyledInput = styled.input`
     display: block;
     width: 100%;
@@ -34,7 +40,8 @@ export const StyledInput = styled.input`
     border: 1px solid #C9CACC;
     //box-sizing: border-box;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
+    
 `
 export const StyledButton = styled.button`
 width: 116px;
@@ -46,16 +53,16 @@ color: #FFF;
 background: linear-gradient(104.34deg, #3C4CAD -15.34%, #00C3FF 145.95%);
 box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
 border-radius: 4px;
+
 border: none;
 position: absolute;
 right: 0%;
-margin-right:33px;
-margin-top: 5px;
+//margin-right:33px;
 &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 4px #99A0A3;
   };
-
+margin-top: 9px;
 
 
 `
